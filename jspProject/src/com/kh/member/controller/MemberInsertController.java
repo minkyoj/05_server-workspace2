@@ -44,6 +44,7 @@ public class MemberInsertController extends HttpServlet {
 		String address = request.getParameter("address"); // "서울시" | ""
 		String[] interestArr = request.getParameterValues("interest"); // ["운동", "등산"] | null
 		
+		
 		// String[] 	  -- > String
 		// ["운동", "등산"]  -- > "운동,등산"
 		String interest = "";
