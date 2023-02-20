@@ -42,8 +42,8 @@
         <h2 align="center">일반게시판 작성하기</h2>
         <br>
 
-        <form id="update-form" action="" method="post" enctype="multipart/form-data"> <!-- 파일 자체를 넘기려면 enctype 필요 -->
-
+        <form id="update-form" action="<%= contextPath %>/update.bo" method="post" enctype="multipart/form-data"> <!-- 파일 자체를 넘기려면 enctype 필요 -->
+			<input type = "hidden" name = "bno" value = "<%= b.getBoardNo() %>">
             <!-- 카테고리, 제목, 내용, 첨부파일 한 개 -->
             
             <table align="center">
@@ -83,6 +83,7 @@
                         <!-- 현재 이 게시글에 붙은 첨부파일이 있을 경우 -->
                         <% if(at != null) { %>
                         	<%= at.getOriginName() %>
+                        	<input type = "hidden" name="originFileNo" value="<%= at.getFileNo() %>">
                         <% } %>
                         <input type="file" name="upfile"></td>
                 </tr>
