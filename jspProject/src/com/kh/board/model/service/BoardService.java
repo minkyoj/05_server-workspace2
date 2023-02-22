@@ -15,7 +15,7 @@ public class BoardService {
 	
 	
 	/**
-	 * 일반게시판 조회수 조회
+	 * 일반게시판 리스트 조회
 	 * @return
 	 */
 	public int selectListCount() {
@@ -171,6 +171,41 @@ public class BoardService {
 		
 		return result1 * result2;
 		
+	}
+	
+	/**
+	 * 사진게시판 등록
+	 * @param b
+	 * @param list
+	 * @return
+	 */
+	public int insertThumbnailBoard(Board b, ArrayList<Attachment> list) {
+		Connection conn = getConnection();
+		
+		int result1 = new BoardDao().insertThBoard(conn, b);
+		int result2 = new BoardDao().insertAttachmentList(conn, list);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1 * result2;
+		
+	}
+	
+	/**
+	 * 사진게시판 목록조회
+	 * @return
+	 */
+	public ArrayList<Board> selectThumbnailList() {
+		Connection conn = getConnection();
+		ArrayList<Board> list = new BoardDao().selectThumbnailList(conn);
+		
+		close(conn);
+		return list;
 	}
 	
 }
