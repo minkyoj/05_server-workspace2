@@ -1,23 +1,29 @@
-package com.kh.controller;
+package com.kh.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Reply;
+
 /**
- * Servlet implementation class JqAjaxController1
+ * Servlet implementation class AjaxReplyListController
  */
-@WebServlet("/jqAjax1.do")
-public class JqAjaxController1 extends HttpServlet {
+@WebServlet("/rlist.bo")
+public class AjaxReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JqAjaxController1() {
+    public AjaxReplyListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,17 +32,13 @@ public class JqAjaxController1 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		
-		String str = request.getParameter("input");
-		// System.out.println("요청시 전달값 : " + str);
+		ArrayList<Reply> list = new BoardService().selectReplyList(boardNo);
 		
-		// 요청 처리 다했다는 가정하에 응답할 데이터
-		String responseData = "입력된 값 - " + str + ", 길이 - " + str.length();
+		response.setContentType("application/json; charset=utf-8");
 		
-		// 응답데이터 돌려주기
-		response.setContentType("text/html; charset=UTF-8"); // 한글이 있다면 인코딩 처리
-		response.getWriter().print(responseData);
-
+		new Gson().toJson(list,response.getWriter());
 		
 	}
 

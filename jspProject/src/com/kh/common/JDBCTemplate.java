@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.Properties;
 
 public class JDBCTemplate {
-	// 싱클톤 패턴 적용하여 jdbc 템플릿 작성 ( 한번 생성하고 계속 꺼내쓰는 방식!! )
+	// 싱글톤 패턴 적용하여 jdbc 템플릿 작성 ( 한번 생성하고 계속 꺼내쓰는 방식!! )
 	
 	// 1. Connection 객체 생성한 후 해당 Connection 객체를 반환해주는 getConnection 메소드
 	public static Connection getConnection() {

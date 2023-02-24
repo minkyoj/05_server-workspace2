@@ -25,6 +25,7 @@ public class NoticeDao {
 			e.printStackTrace();
 		}
 	}
+	
 
 	public ArrayList<Notice> selectNoticeList(Connection conn) {
 		// select문 => ResultSet객체 => 1행? : 단일객체 | n행? : ArrayList(객체1, 객체2)
